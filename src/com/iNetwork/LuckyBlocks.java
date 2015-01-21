@@ -36,13 +36,11 @@ public class LuckyBlocks extends JavaPlugin implements Listener{
         LuckySwordEnchantMeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "Lucky Sword");
         LuckySwordEnchant.setItemMeta(LuckySwordEnchantMeta);
         
-        ItemStack LuckyHelmet = new ItemStack (Material.GOLD_SWORD, 1);
+        ItemStack LuckyHelmet = new ItemStack (Material.GOLD_HELMET, 1);
         ItemMeta LuckyHelmetMeta = LuckySwordEnchant.getItemMeta();
-        LuckyHelmetMeta.addEnchant(Enchantment.DAMAGE_ALL, 15, true);
-        LuckyHelmetMeta.addEnchant(Enchantment.KNOCKBACK, 10, true);
-        LuckyHelmetMeta.addEnchant(Enchantment.LOOT_BONUS_MOBS, 10, true);
-        LuckyHelmetMeta.addEnchant(Enchantment.DURABILITY, 10, true);
-        LuckyHelmetMeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "Lucky Sword");
+        // Do this how many times you want depending on the item.
+        LuckyHelmetMeta.addEnchant(// Enchantment.(Your enchantment), // Enchant Buff, true);
+        LuckyHelmetMeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "Lucky Hemlet");
         LuckyHelmet.setItemMeta(LuckyHelmetMeta);
         
         
@@ -67,6 +65,7 @@ public class LuckyBlocks extends JavaPlugin implements Listener{
             gift.add(new ItemStack(Material.GOLD_AXE));
             gift.add(new ItemStack(Material.ROTTEN_FLESH));
             ItemStack m = gift.get(rand.nextInt(gift.size()));
+            e.getBlock().remove();
             Player p = event.getPlayer();
             p.getInventory().addItem(m);
         }
