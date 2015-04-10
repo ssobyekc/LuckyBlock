@@ -18,35 +18,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class LuckyBlocks extends JavaPlugin implements Listener{
 	
+	List<ItemStack> gift = new ArrayList<ItemStack>();
+	
 	@Override
 	public void onEnable() {
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
-	}
-	
-	@EventHandler
-    public void onBlockBreak(BlockBreakEvent event){
-        Random rand = new Random();
-        
-        ItemStack LuckySwordEnchant = new ItemStack (Material.GOLD_SWORD, 1);
-        ItemMeta LuckySwordEnchantMeta = LuckySwordEnchant.getItemMeta();
-        LuckySwordEnchantMeta.addEnchant(Enchantment.DAMAGE_ALL, 15, true);
-        LuckySwordEnchantMeta.addEnchant(Enchantment.KNOCKBACK, 10, true);
-        LuckySwordEnchantMeta.addEnchant(Enchantment.LOOT_BONUS_MOBS, 10, true);
-        LuckySwordEnchantMeta.addEnchant(Enchantment.DURABILITY, 10, true);
-        LuckySwordEnchantMeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "Lucky Sword");
-        LuckySwordEnchant.setItemMeta(LuckySwordEnchantMeta);
-        
-        ItemStack LuckyHelmet = new ItemStack (Material.GOLD_HELMET, 1);
-        ItemMeta LuckyHelmetMeta = LuckySwordEnchant.getItemMeta();
-        // Do this how many times you want depending on the item.
-        LuckyHelmetMeta.addEnchant(// Enchantment.(Your enchantment), // Enchant Buff, true);
-        LuckyHelmetMeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "Lucky Hemlet");
-        LuckyHelmet.setItemMeta(LuckyHelmetMeta);
-        
-        
-        if(event.getBlock().getType() == Material.SPONGE){
-            List<ItemStack> gift = new ArrayList<ItemStack>();
-            gift.add(new ItemStack(Material.DIAMOND));
+		
+	    gift.add(new ItemStack(Material.DIAMOND));
             gift.add(new ItemStack(Material.PAPER));
             gift.add(new ItemStack(Material.COCOA));
             gift.add(new ItemStack(Material.PAPER));
@@ -64,10 +42,35 @@ public class LuckyBlocks extends JavaPlugin implements Listener{
             gift.add(new ItemStack(Material.AIR));;
             gift.add(new ItemStack(Material.GOLD_AXE));
             gift.add(new ItemStack(Material.ROTTEN_FLESH));
+            
+              ItemStack LuckySwordEnchant = new ItemStack (Material.GOLD_SWORD, 1);
+        ItemMeta LuckySwordEnchantMeta = LuckySwordEnchant.getItemMeta();
+        LuckySwordEnchantMeta.addEnchant(Enchantment.DAMAGE_ALL, 15, true);
+        LuckySwordEnchantMeta.addEnchant(Enchantment.KNOCKBACK, 10, true);
+        LuckySwordEnchantMeta.addEnchant(Enchantment.LOOT_BONUS_MOBS, 10, true);
+        LuckySwordEnchantMeta.addEnchant(Enchantment.DURABILITY, 10, true);
+        LuckySwordEnchantMeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "Lucky Sword");
+        LuckySwordEnchant.setItemMeta(LuckySwordEnchantMeta);
+        
+        ItemStack LuckyHelmet = new ItemStack (Material.GOLD_HELMET, 1);
+        ItemMeta LuckyHelmetMeta = LuckySwordEnchant.getItemMeta();
+        // Do this how many times you want depending on the item.
+        LuckyHelmetMeta.addEnchant(/** Enchantment.(Your enchantment), Enchant Buff, true*/);
+        LuckyHelmetMeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "Lucky Hemlet");
+        LuckyHelmet.setItemMeta(LuckyHelmetMeta);
+        
+        gift.add(LuckySwordEnchant);
+        gift.add(LuckyHelmet);
+	}
+	
+	@EventHandler
+    public void onBlockBreak(BlockBreakEvent event){
+        Random rand = new Random();
+        if(event.getBlock().getType() == Material.SPONGE){
             ItemStack m = gift.get(rand.nextInt(gift.size()));
             e.getBlock().remove();
             Player p = event.getPlayer();
             p.getInventory().addItem(m);
-        }
+        	}
 	}
 }
